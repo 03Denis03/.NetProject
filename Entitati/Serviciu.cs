@@ -18,14 +18,14 @@ namespace Entitati
             return base.Descriere();
         }
 
-
-        public bool CompareObject(Serviciu itemToAdd, Serviciu itemForCompare)
+        public override string Descriere2()
         {
-            if (itemForCompare.Name == itemToAdd.Name && itemForCompare.CodIntern == itemToAdd.CodIntern)
-            {
-                return true;
-            }
-            return false;
+            return "Serviciul: " + this.Name + "[" + this.CodIntern
+            + "] ";
+        }
+        public override bool CompareObject(ProdusAbstract itemToAdd)
+        {
+            return base.CompareObject(itemToAdd);
         }
     }
 

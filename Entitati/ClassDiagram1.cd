@@ -3,21 +3,21 @@
   <Class Name="Entitati.Produs">
     <Position X="1.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAFAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAgAAAAAAAAAAAAAAAFAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
       <FileName>Produs.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Entitati.Serviciu">
     <Position X="4" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAgAAAAAAAAAAAAAAAEAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
       <FileName>Serviciu.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Entitati.ProdusAbstract">
     <Position X="2.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAACAAAAAQAAAAA=</HashCode>
+      <HashCode>AAAiAAAAAAAAAAAAAAAAAAQAAAAAAAACAAAAAQAAAAA=</HashCode>
       <FileName>ProdusAbstract.cs</FileName>
     </TypeIdentifier>
   </Class>

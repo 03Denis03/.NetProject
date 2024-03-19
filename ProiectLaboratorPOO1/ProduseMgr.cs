@@ -9,13 +9,10 @@ using Entitati;
 
 namespace ProiectLaboratorPOO1
 {
-    internal class ProduseMgr
+    internal class ProduseMgr:ProdusAbstractMgr
     {
-        Produs[] produse = new Produs[100];
-
-        public int Count { get; set; } = 0;
-
-        private Produs userInputData(int id)
+        
+        public Produs userInputData(int id)
         {
             String? nume;
             String? codIntern;
@@ -31,60 +28,17 @@ namespace ProiectLaboratorPOO1
             producator = Console.ReadLine();
             return new Produs(id, nume, codIntern, producator);
         }// citim datele unui produs
-        int idP = 0;
-        
-        public void ReadProduse(int nrProduse)
+        public void ReadAbsProds(int number)
         {
-            
-            if (nrProduse == 1) 
+            Produs produs;
+            int cnt = CountElemente;
+            for (int i = cnt; i < cnt + number; i++)
             {
-                ReadProdus();
-            }
-            else if(nrProduse > 1) 
-            {
-                for (int cnt = 0; cnt < nrProduse; cnt++)
-                {
-                    ReadProdus();
-                }
-            }
-            
-        }
-        public void ReadProdus()
-        {
-            bool condition = false;
-            Produs prod = userInputData(idP);
-            if(Count == 0)
-            {
-                produse[0] = prod;
-                Count++;
-                idP++;
-            }
-            else 
-            {
-                for (int i = 0; i < Count; i++)
-                {
-                    condition = prod.CompareObject(prod, produse[i]);
-                    if (condition)
-                    {
-                        break;
-                    }
-                }
-                if (!condition)
-                {
-                    produse[Count] = prod;
-                    Count++;
-                    idP++;
-                }
+                produs = userInputData(Id);
+                ReadAbsProd(produs);
             }
         }
-        public void WriteProduse()
-        {
-            Produs prod = new Produs();
-            for (int cnt = 0; cnt < Count; cnt++)
-            {
-                Console.WriteLine(produse[cnt].Descriere());
-            }
-        }
+
     }
 
 }

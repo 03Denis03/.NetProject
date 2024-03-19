@@ -23,10 +23,15 @@ namespace Entitati
             return "Produsul: " + base.Descriere() + Producator;
         }
 
-        public bool CompareObject(Produs itemToAdd, Produs itemToCompare)
+        public override string Descriere2()
         {
-            if (itemToCompare.Name == itemToAdd.Name && itemToCompare.CodIntern == itemToAdd.CodIntern &&
-                    itemToCompare.Producator == itemToAdd.Producator)
+            return "Produsul: " + this.Name + "[" + this.CodIntern
+            + "] " + this.Producator;
+        }
+
+        public override bool CompareObject(ProdusAbstract itemToAdd)
+        {
+            if (base.CompareObject(itemToAdd) && this.Producator == ((Produs)itemToAdd).Producator)
             {
                 return true;
             }

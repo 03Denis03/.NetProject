@@ -25,5 +25,15 @@ namespace Entitati
         {
             return Name + "[" + CodIntern + "] " + Id + " ";
         }
+        public abstract string Descriere2();
+
+        public virtual bool CompareObject(ProdusAbstract itemToAdd)
+        {
+            if (this.Name == itemToAdd.Name && this.CodIntern == itemToAdd.CodIntern)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<pachete>
+	<pachet>
+		<infoPach>
+			<nume>cvb</nume>
+			<codIntern>q123e</codIntern>
+			<categorie>u</categorie>
+		</infoPach>
+		<produs>
+			<nume>iop</nume>
+			<codIntern>pio</codIntern>
+			<producator>ert</producator>
+			<categorie>ult</categorie>
+			<pret>26</pret>	
+		</produs>
+		<serviciu>
+			<nume>a</nume>
+			<codIntern>s</codIntern>
+			<categorie>d</categorie>
+			<pret>78</pret>	
+		</serviciu>
+	</pachet>
+
+	<pachet>
+		<infoPach>
+			<nume>uio</nume>
+			<codIntern>kl234</codIntern>
+			<categorie>op</categorie>
+		</infoPach>
+		<produs>
+			<nume>tyou</nume>
+			<codIntern>dsgfasd</codIntern>
+			<producator>asdf</producator>
+			<categorie>asdf</categorie>
+			<pret>2345</pret>
+		</produs>
+		<serviciu>
+			<nume>fdgs</nume>
+			<codIntern>htrj</codIntern>
+			<categorie>qer</categorie>
+			<pret>789</pret>
+		</serviciu>
+	</pachet>
+
+</pachete>

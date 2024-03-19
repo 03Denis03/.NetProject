@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<produse>
+	<produs>
+		<Nume>Calculator</Nume>
+		<CodIntern>123er</CodIntern>
+		<Producator>Lenovo</Producator>
+		<Pret>3600</Pret>
+		<Categorie>IT</Categorie>
+	</produs>
+
+	<produs>
+		<Nume>Fier_de_Calcat</Nume>
+		<CodIntern>12ty3</CodIntern>
+		<Producator>Philips</Producator>
+		<Pret>250</Pret>
+		<Categorie>Electrocasnice</Categorie>
+	</produs>
+
+	<produs>
+		<Nume>Aspirator</Nume>
+		<CodIntern>89op4</CodIntern>
+		<Producator>Samsung</Producator>
+		<Pret>500</Pret>
+		<Categorie>Electrocasnice</Categorie>
+	</produs>
+
+	<produs>
+		<Nume>Galaxy_S24_Ultra</Nume>
+		<CodIntern>12sgu24</CodIntern>
+		<Producator>Samsung</Producator>
+		<Pret>7000</Pret>
+		<Categorie>IT</Categorie>
+	</produs>
+
+	<produs>
+		<Nume>Solutie_Decalcifiat</Nume>
+		<CodIntern>234Ser5</CodIntern>
+		<Producator>De'Longhi</Producator>
+		<Pret>60</Pret>
+		<Categorie>Intretinere</Categorie>
+	</produs>
+
+	<serviciu>
+		<Nume>Mentenanta</Nume>
+		<CodIntern>rt5y7</CodIntern>
+		<Pret>400</Pret>
+		<Categorie>Intretinere</Categorie>
+	</serviciu>
+
+	<serviciu>
+		<Nume>Reparatii</Nume>
+		<CodIntern>45yu</CodIntern>
+		<Pret>50</Pret>
+		<Categorie>Intretinere</Categorie>
+	</serviciu>
+</produse> 

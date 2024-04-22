@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.Intrinsics.Arm;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Entitati;
 using System.Xml;
-using Entitati;
 
 namespace ProiectLaboratorPOO1
 {
-    public class ProduseMgr:ProdusAbstractMgr
+    public class ProduseMgr : ProdusAbstractMgr
     {
-        
+
         public Produs userInputData(int id)
         {
             string? nume;
@@ -20,7 +13,7 @@ namespace ProiectLaboratorPOO1
             string? producator;
 
             string? categorie;
-            float pret;
+            int pret;
 
             Console.WriteLine("Introdu un produs");
             Console.Write("Numele:");
@@ -34,13 +27,13 @@ namespace ProiectLaboratorPOO1
             categorie = Console.ReadLine();
 
             Console.WriteLine("Pret: ");
-            pret = float.Parse(Console.ReadLine() ?? string.Empty);
+            pret = int.Parse(Console.ReadLine() ?? string.Empty);
             return new Produs(id, nume, codIntern, producator, categorie, pret);
         }// citim datele unui produs
         public void ReadAbsProds(int number)
         {
             Produs produs;
-            
+
             for (int i = 0; i < number; i++)
             {
                 produs = userInputData(Id);
@@ -54,7 +47,7 @@ namespace ProiectLaboratorPOO1
             XmlDocument doc = new XmlDocument();
             //incarca fisierul
             doc.Load("C:\\All folder\\C# POO\\POS\\ProiectLaboratorPOO1\\XML\\produse.xml"); //calea spre fisier
-                                        //selecteaza nodurile
+                                                                                             //selecteaza nodurile
             XmlNodeList lista_noduri = doc.SelectNodes("/produse/produs");
             foreach (XmlNode nod in lista_noduri)
             {
@@ -63,7 +56,7 @@ namespace ProiectLaboratorPOO1
                 string nume = nod["Nume"].InnerText;
                 string codIntern = nod["CodIntern"].InnerText;
                 string producator = nod["Producator"].InnerText;
-                float pret = float.Parse(nod["Pret"].InnerText);
+                int pret = int.Parse(nod["Pret"].InnerText);
                 string categorie = nod["Categorie"].InnerText;
                 //adauga in lista produse
                 elemente.Add(new Produs(elemente.Count + 1, nume, codIntern, producator, categorie, pret));
@@ -79,8 +72,8 @@ namespace ProiectLaboratorPOO1
             else Console.WriteLine("Acest produs nu exista in lista noastra de produse");
         }
 
-        
-        
+
+
 
     }
 

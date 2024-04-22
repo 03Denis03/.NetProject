@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Entitati
 {
-    public class Pachet:ProdusAbstract
+    public class Pachet:ProdusAbstract, IComparer<ProdusAbstract>
     {
         public List<IPackageable> Elemente_pachet { get; set; } = new List<IPackageable>();
         public int ProdNumber { get; set; }
@@ -69,9 +69,36 @@ namespace Entitati
             return false;
         }
 
-        
 
-        
+        public int CompareTo(ProdusAbstract x)
+        {
+            return Pret.CompareTo(x.Pret);
+        }
+
+        public int Compare(Pachet first, Pachet second)
+        {
+            if (first != null && second != null)
+            {
+                // We can compare both properties.
+                return first.Pret.CompareTo(second.Pret);
+            }
+
+            if (first == null && second == null)
+            {
+                // We can't compare any properties, so they are essentially equal.
+                return 0;
+            }
+
+            if (first != null)
+            {
+                // Only the first instance is not null, so prefer that.
+                return -1;
+            }
+
+            // Only the second instance is not null, so prefer that.
+            return 1;
+        }
+
 
     }
 }

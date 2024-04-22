@@ -1,10 +1,6 @@
 ﻿using Entitati;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
+using ProiectLaboratorPOO1.Criteriu;
+using ProiectLaboratorPOO1.Filtrare;
 
 namespace ProiectLaboratorPOO1
 {
@@ -25,7 +21,7 @@ namespace ProiectLaboratorPOO1
 
         protected bool VerifyUnicity(ProdusAbstract item)
         {
-            foreach(ProdusAbstract elem in elemente)
+            foreach (ProdusAbstract elem in elemente)
             {
                 if (elem.Equals(item))
                 {
@@ -53,12 +49,12 @@ namespace ProiectLaboratorPOO1
         public List<ProdusAbstract> Contine(String nume)
         {
             List<ProdusAbstract> rezultate = new List<ProdusAbstract>();
-            foreach(ProdusAbstract elem in elemente)
+            foreach (ProdusAbstract elem in elemente)
             {
                 if (elem.Name == nume)
                 {
                     rezultate.Add(elem);
-            
+
                 }
             }
             return rezultate;
@@ -72,21 +68,69 @@ namespace ProiectLaboratorPOO1
             from elem in elemente
             where elem.Name == nume
             select elem;
-            foreach(ProdusAbstract elem in interogare_linq)
+            foreach (ProdusAbstract elem in interogare_linq)
             {
                 Console.WriteLine(elem.ToString());
             }
         }
 
-        public void afisare() 
-        { 
-            foreach(ProdusAbstract e in elemente)
+        public void Sortare()
+        {
+            elemente.Sort((first, second) =>
+            {
+                if (first != null && second != null)
+                    return first.Pret.CompareTo(second.Pret);
+
+                if (first == null && second == null)
+                    return 0;
+
+                if (first != null)
+                    return -1;
+
+                return 1;
+            });
+        }
+
+        public void afisare()
+        {
+
+            foreach (ProdusAbstract e in elemente)
             {
                 Console.WriteLine(e.ToString());
             }
         }
 
-        
+        public void FiltrareDupaCategorieProd()
+        {
+            string? cat = Console.ReadLine();
+            CriteriuCategorie criteriu = new CriteriuCategorie(cat);
+            FIltrareDupaCategorie filtru = new FIltrareDupaCategorie();
+            List<ProdusAbstract> rez = filtru.Filtrare(elemente, criteriu);
+            if (rez.Any())
+            {
+                foreach(ProdusAbstract elem in rez)
+                {
+                    Console.WriteLine(elem.ToString() );
+                }
+            }
+
+        }
+
+        public void FiltrareDupaPretProd()
+        {
+            int prt = int.Parse(Console.ReadLine() ?? string.Empty);
+            CriteriuPret criteriu = new CriteriuPret(prt);
+            FiltrareDupaPret filtru = new FiltrareDupaPret();
+            List<ProdusAbstract> rez = filtru.Filtrare(elemente, criteriu);
+            if (rez.Any())
+            {
+                foreach (ProdusAbstract elem in rez)
+                {
+                    Console.WriteLine(elem.ToString());
+                }
+            }
+
+        }
 
     }
 }

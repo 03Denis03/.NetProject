@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Entitati;
+﻿using Entitati;
 
 namespace ProiectLaboratorPOO1
 {
@@ -13,10 +7,10 @@ namespace ProiectLaboratorPOO1
         ProduseMgr prod = new ProduseMgr();
         ServiciiMgr serv = new ServiciiMgr();
         Pachet pch = new Pachet();
-        PachetMgr pchMgr = new PachetMgr(); 
+        PachetMgr pchMgr = new PachetMgr();
         public void Menu()
         {
-            
+
             Console.WriteLine("Salut! Ne bucuram ca ai ales programul nostru pentru organizarea produselor tale.");
             Console.WriteLine("Cu ce te putem ajuta azi?");
             int op;
@@ -28,7 +22,7 @@ namespace ProiectLaboratorPOO1
                 Console.Write("Alege o optiune: ");
                 op = int.Parse(Console.ReadLine() ?? string.Empty);
                 Console.ForegroundColor = ConsoleColor.Gray;
-                actiuniMeniu(op); 
+                actiuniMeniu(op);
             } while (op != 0);
         }
         private void optiuniMeniu()
@@ -48,8 +42,10 @@ namespace ProiectLaboratorPOO1
             Console.WriteLine("12. Adauga pachete de la tastatura");
             Console.WriteLine("13. Afiseaza pachetele");
             Console.WriteLine("14. Incarca pachetele din xml");
+            Console.WriteLine("15. Filtrare dupa categorie");
+            Console.WriteLine("16. Filtrare dupa pret");
         }
-        private void actiuniMeniu(int n) 
+        private void actiuniMeniu(int n)
         {
             switch (n)
             {
@@ -60,6 +56,8 @@ namespace ProiectLaboratorPOO1
                     Console.Clear();
                     prod.InitListafromXML();
                     serv.InitListafromXML();
+                    prod.Sortare();
+                    serv.Sortare();
                     Console.WriteLine("Incarcarea a avut succes!");
                     break;
                 case 2:
@@ -67,12 +65,14 @@ namespace ProiectLaboratorPOO1
                     Console.Write("Nr. produse:");
                     int nrProduse = int.Parse(Console.ReadLine() ?? string.Empty);
                     prod.ReadAbsProds(nrProduse);
+                    prod.Sortare();
                     break;
                 case 3:
                     Console.Clear();
                     Console.WriteLine("Nr. Servicii: ");
                     int NrServicii = int.Parse(Console.ReadLine() ?? String.Empty);
                     serv.ReadAbsProds(NrServicii);
+                    serv.Sortare();
                     break;
                 case 4:
                     Console.Clear();
@@ -117,6 +117,7 @@ namespace ProiectLaboratorPOO1
                     Console.Write("cate Pachete introduci: ");
                     int number = int.Parse(Console.ReadLine() ?? string.Empty);
                     pchMgr.readPachet(number);
+                    pchMgr.Sortare();
                     break;
                 case 13:
                     Console.Clear();
@@ -125,11 +126,23 @@ namespace ProiectLaboratorPOO1
                 case 14:
                     Console.Clear();
                     pchMgr.InitListafromXML();
+                    pchMgr.Sortare();
                     Console.WriteLine("Incarcarea a avut loc cu succes!");
+                    break;
+                case 15:
+                    Console.Clear();
+                    Console.WriteLine("Introdu categoria dorita: ");
+                    pchMgr.FiltrareDupaCategorieProd();
+                    break;
+                case 16:
+                    Console.Clear();
+                    Console.WriteLine("Introdu filtrul de pret: ");
+                    pchMgr.FiltrareDupaPretProd();
                     break;
                 default:
                     Console.Clear();
                     Console.WriteLine("Nu avem optiunea solicitata!");
+
                     break;
             }
         }

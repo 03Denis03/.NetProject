@@ -1,17 +1,10 @@
 ﻿using Entitati;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
-using System.Xml.Schema;
 
 namespace ProiectLaboratorPOO1
 {
-    internal class PachetMgr:ProdusAbstractMgr
+    internal class PachetMgr : ProdusAbstractMgr
     {
         public int IdP { get; set; } = 0;
 
@@ -20,7 +13,7 @@ namespace ProiectLaboratorPOO1
             string? nume;
             string? codIntern;
             string? categorie;
-            
+
             Console.WriteLine("Introdu un pachet");
             Console.Write("Numele:");
             nume = Console.ReadLine();
@@ -30,19 +23,19 @@ namespace ProiectLaboratorPOO1
 
             Console.WriteLine("Categoria: ");
             categorie = Console.ReadLine();
-            
+
             Pachet pch;
             IdP++;
-            pch= ReadProdServ();
+            pch = ReadProdServ();
             pch.CodIntern = codIntern;
             pch.Categorie = categorie;
             pch.Name = nume;
-            
+
             return pch;
         }
         public Pachet ReadProdServ()
         {
-            float pret = 0;
+            int pret = 0;
             Pachet pch = new Pachet();
             ProduseMgr prodmgr = new ProduseMgr();
             ServiciiMgr servmgr = new ServiciiMgr();
@@ -61,12 +54,12 @@ namespace ProiectLaboratorPOO1
             for (int i = 0; i < prodNumber; i++)
             {
                 Produs prod = prodmgr.userInputData(Id);
-                    if(prod.canAddToPackage(pch))
-                    {
-                        pch.Elemente_pachet.Add(prod);
-                        Id++;
-                        pret = pret + prod.Pret;
-                    } 
+                if (prod.canAddToPackage(pch))
+                {
+                    pch.Elemente_pachet.Add(prod);
+                    Id++;
+                    pret = pret + prod.Pret;
+                }
             }
 
             for (int i = 0; i < servNumber; i++)
@@ -85,15 +78,15 @@ namespace ProiectLaboratorPOO1
 
         public void readPachet(int number)
         {
-            for(int i = 0;i < number; i++)
+            for (int i = 0; i < number; i++)
             {
                 elemente.Add(userInputData());
             }
         }
-        
+
         public void afis()
         {
-            foreach(Pachet pachet in elemente)
+            foreach (Pachet pachet in elemente)
             {
                 Console.WriteLine(pachet.ToString());
             }
@@ -104,24 +97,24 @@ namespace ProiectLaboratorPOO1
             //initializare lista dintr-un fisier XML
             XmlDocument doc = new XmlDocument();
             //incarca fisierul
-            
+
             doc.Load("C:\\All folder\\C# POO\\POS\\ProiectLaboratorPOO1\\XML\\Pachete.xml"); //calea spre fisier
-                                                                                        //selecteaza nodurile
+                                                                                             //selecteaza nodurile
             XmlNodeList lista_noduri = doc.SelectNodes("/pachete/pachet/infoPach");
             foreach (XmlNode nod in lista_noduri)
             {
                 Pachet pachet = new Pachet();
-                float pret = 0;
+                int pret = 0;
                 pachet.Name = nod["nume"].InnerText;
                 pachet.CodIntern = nod["codIntern"].InnerText;
                 pachet.Categorie = nod["categorie"].InnerText;
                 XmlNodeList lista_prod = nod.SelectNodes("../produs");
-                foreach(XmlNode nodp in lista_prod)
+                foreach (XmlNode nodp in lista_prod)
                 {
                     string nume = nodp["nume"].InnerText;
                     string codIntern = nodp["codIntern"].InnerText;
                     string producator = nodp["producator"].InnerText;
-                    float pretp = float.Parse(nodp["pret"].InnerText);
+                    int pretp = int.Parse(nodp["pret"].InnerText);
                     string categorie = nodp["categorie"].InnerText;
                     pret = pret + pretp;
                     //adauga in lista produse
@@ -130,13 +123,13 @@ namespace ProiectLaboratorPOO1
                 }
 
                 XmlNodeList lista_serv = nod.SelectNodes("../serviciu");
-                foreach(XmlNode nodS in lista_serv)
+                foreach (XmlNode nodS in lista_serv)
                 {
                     //itereaza si selecteaza simpurile fiecarui nod si
                     //informatia continuta in cadrul proprietatii InnerText
                     string nume = nodS["nume"].InnerText;
                     string codIntern = nodS["codIntern"].InnerText;
-                    float pretS = float.Parse(nodS["pret"].InnerText);
+                    int pretS = int.Parse(nodS["pret"].InnerText);
                     string categorie = nodS["categorie"].InnerText;
                     pret = pret + pretS;
                     //adauga in lista produse
@@ -150,5 +143,5 @@ namespace ProiectLaboratorPOO1
 
     }
 
-    
+
 }

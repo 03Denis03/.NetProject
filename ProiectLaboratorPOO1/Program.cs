@@ -1,6 +1,4 @@
-﻿using Entitati;
-using System.Reflection.Metadata;
-namespace ProiectLaboratorPOO1
+﻿namespace ProiectLaboratorPOO1
 {
     internal class Program
     {

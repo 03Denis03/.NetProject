@@ -13,7 +13,7 @@ namespace Entitati
     {
         public string? Producator { get; set; }
         public int ProductNumber { get; set; }
-        public Produs(int id, string? name, string? codIntern, string? producator, string? categorie, float pret):base(name, codIntern, id, categorie, pret)
+        public Produs(int id, string? name, string? codIntern, string? producator, string? categorie, int pret):base(name, codIntern, id, categorie, pret)
         {
             Producator = producator;
         }

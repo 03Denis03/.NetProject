@@ -10,7 +10,7 @@ namespace Entitati
     public class Serviciu:ProdusAbstract
     {
         public int ServiceNumber { get; set; }
-        public Serviciu(int id, string? nume, string? codIntern, string? categorie, float pret):base(nume, codIntern, id, categorie, pret)
+        public Serviciu(int id, string? nume, string? codIntern, string? categorie, int pret):base(nume, codIntern, id, categorie, pret)
         {
             
         }

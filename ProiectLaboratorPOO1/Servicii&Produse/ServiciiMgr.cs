@@ -1,22 +1,16 @@
 ﻿using Entitati;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Intrinsics.Arm;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 
 namespace ProiectLaboratorPOO1
 {
-    public class ServiciiMgr:ProdusAbstractMgr
+    public class ServiciiMgr : ProdusAbstractMgr
     {
         internal Serviciu userInputData(int id)
         {
             string? nume;
             string? codIntern;
             string? categorie;
-            float pret;
+            int pret;
 
             Console.WriteLine("Introdu un Serviciu");
             Console.Write("Numele:");
@@ -29,7 +23,7 @@ namespace ProiectLaboratorPOO1
             categorie = Console.ReadLine();
 
             Console.WriteLine("Pret: ");
-            pret= float.Parse(Console.ReadLine() ?? string.Empty);
+            pret = int.Parse(Console.ReadLine() ?? string.Empty);
 
             return new Serviciu(id, nume, codIntern, categorie, pret);
         }
@@ -37,7 +31,7 @@ namespace ProiectLaboratorPOO1
         public void ReadAbsProds(int number)
         {
             Serviciu serviciu;
-            
+
             for (int i = 0; i < number; i++)
             {
                 serviciu = userInputData(Id);
@@ -51,7 +45,7 @@ namespace ProiectLaboratorPOO1
             XmlDocument doc = new XmlDocument();
             //incarca fisierul
             doc.Load("C:\\All folder\\C# POO\\POS\\ProiectLaboratorPOO1\\XML\\produse.xml"); //calea spre fisier
-                                        //selecteaza nodurile
+                                                                                             //selecteaza nodurile
             XmlNodeList lista_noduri = doc.SelectNodes("/produse/serviciu");
 
             foreach (XmlNode nod in lista_noduri)
@@ -60,7 +54,7 @@ namespace ProiectLaboratorPOO1
                 //informatia continuta in cadrul proprietatii InnerText
                 string nume = nod["Nume"].InnerText;
                 string codIntern = nod["CodIntern"].InnerText;
-                float pret = float.Parse(nod["Pret"].InnerText);
+                int pret = int.Parse(nod["Pret"].InnerText);
                 string categorie = nod["Categorie"].InnerText;
                 //adauga in lista produse
                 elemente.Add(new Serviciu(elemente.Count + 1, nume, codIntern, categorie, pret));

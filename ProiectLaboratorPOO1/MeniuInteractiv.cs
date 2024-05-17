@@ -1,4 +1,5 @@
 ﻿using Entitati;
+using System.ComponentModel;
 
 namespace ProiectLaboratorPOO1
 {
@@ -8,10 +9,11 @@ namespace ProiectLaboratorPOO1
         ServiciiMgr serv = new ServiciiMgr();
         Pachet pch = new Pachet();
         PachetMgr pchMgr = new PachetMgr();
+        int noOfPcK;
         public void Menu()
         {
 
-            Console.WriteLine("Salut! Ne bucuram ca ai ales programul nostru pentru organizarea produselor tale.");
+            Console.WriteLine("Salut! Ne bucuram ca ai ales programul nostru pentru organizarea pachetelor tale.");
             Console.WriteLine("Cu ce te putem ajuta azi?");
             int op;
             do
@@ -28,22 +30,12 @@ namespace ProiectLaboratorPOO1
         private void optiuniMeniu()
         {
             Console.WriteLine("0. Inchide programul");
-            Console.WriteLine("1. Incarca produsele si serviciile din fisierul Xml");
-            Console.WriteLine("2. Introdu produse de la tastatura");
-            Console.WriteLine("3. Introdu servicii de la tastatura");
-            Console.WriteLine("4. Cauta un produs dupa toate informatiile sale");
-            Console.WriteLine("5. Cauta un serviciu dupa toate informatiile sale");
-            Console.WriteLine("6. Cauta produse cu acelasi nume");
-            Console.WriteLine("7. Cauta servicii cu acelasi nume");
-            Console.WriteLine("8. Afiseaza produsele");
-            Console.WriteLine("9. Afiseaza serviciile");
-            Console.WriteLine("10. Afiseaza produsele si serviciile");
-            Console.WriteLine("11. Actualizeaza setarile");
-            Console.WriteLine("12. Adauga pachete de la tastatura");
-            Console.WriteLine("13. Afiseaza pachetele");
-            Console.WriteLine("14. Incarca pachetele din xml");
-            Console.WriteLine("15. Filtrare dupa categorie");
-            Console.WriteLine("16. Filtrare dupa pret");
+            Console.WriteLine("1. Actualizeaza setarile");
+            Console.WriteLine("2. Adauga pachete de la tastatura");
+            Console.WriteLine("3. Afiseaza pachetele");
+            Console.WriteLine("4. Incarca pachetele din xml");
+            Console.WriteLine("5. Filtrare dupa categorie");
+            Console.WriteLine("6. Filtrare dupa pret");
         }
         private void actiuniMeniu(int n)
         {
@@ -54,64 +46,10 @@ namespace ProiectLaboratorPOO1
                     break;
                 case 1:
                     Console.Clear();
-                    prod.InitListafromXML();
-                    serv.InitListafromXML();
-                    prod.Sortare();
-                    serv.Sortare();
-                    Console.WriteLine("Incarcarea a avut succes!");
-                    break;
-                case 2:
-                    Console.Clear();
-                    Console.Write("Nr. produse:");
-                    int nrProduse = int.Parse(Console.ReadLine() ?? string.Empty);
-                    prod.ReadAbsProds(nrProduse);
-                    prod.Sortare();
-                    break;
-                case 3:
-                    Console.Clear();
-                    Console.WriteLine("Nr. Servicii: ");
-                    int NrServicii = int.Parse(Console.ReadLine() ?? String.Empty);
-                    serv.ReadAbsProds(NrServicii);
-                    serv.Sortare();
-                    break;
-                case 4:
-                    Console.Clear();
-                    prod.Exista();
-                    break;
-                case 5:
-                    Console.Clear();
-                    serv.Exista();
-                    break;
-                case 6:
-                    Console.Clear();
-                    prod.CautaDupaNume();
-                    break;
-                case 7:
-                    Console.Clear();
-                    serv.CautaDupaNume();
-                    break;
-                case 8:
-                    Console.Clear();
-                    Console.WriteLine("Produsele sunt");
-                    prod.afisare();
-                    break;
-                case 9:
-                    Console.Clear();
-                    Console.WriteLine("Serviciile sunt");
-                    serv.afisare();
-                    break;
-                case 10:
-                    Console.Clear();
-                    Console.WriteLine("Produsele si serviciile sunt: ");
-                    prod.afisare();
-                    serv.afisare();
-                    break;
-                case 11:
-                    Console.Clear();
                     Console.WriteLine("Seteaza numarul de produse si servicii");
                     pch.setTheNumberOfProducts();
                     break;
-                case 12:
+                case 2:
                     Console.Clear();
                     Console.WriteLine("Introdu Pachete");
                     Console.Write("cate Pachete introduci: ");
@@ -119,26 +57,38 @@ namespace ProiectLaboratorPOO1
                     pchMgr.readPachet(number);
                     pchMgr.Sortare();
                     break;
-                case 13:
+                case 3:
                     Console.Clear();
                     pchMgr.afis();
                     break;
-                case 14:
+                case 4:
                     Console.Clear();
                     pchMgr.InitListafromXML();
                     pchMgr.Sortare();
                     Console.WriteLine("Incarcarea a avut loc cu succes!");
                     break;
-                case 15:
+                case 5:
                     Console.Clear();
                     Console.WriteLine("Introdu categoria dorita: ");
                     pchMgr.FiltrareDupaCategorieProd();
                     break;
-                case 16:
+                case 6:
                     Console.Clear();
                     Console.WriteLine("Introdu filtrul de pret: ");
                     pchMgr.FiltrareDupaPretProd();
                     break;
+                case 7:
+                    Console.Clear();
+                    Console.Write("Cate pachete vrei sa serializazi: ");
+                    noOfPcK = int.Parse(Console.ReadLine() ?? string.Empty);
+                    pchMgr.dataSerialization(noOfPcK);
+                    break;
+                case 8:
+                    Console.Clear();
+                    pchMgr.dataDeserialization();
+                    Console.WriteLine("Deserializarea a avut loc cu succes");
+                    break;
+
                 default:
                     Console.Clear();
                     Console.WriteLine("Nu avem optiunea solicitata!");

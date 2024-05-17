@@ -1,26 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
+﻿using System.Data;
 using System.Text;
-using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Serialization;
 
 
 namespace Entitati
 {
+    [Serializable]
     public class Pachet:ProdusAbstract, IComparer<ProdusAbstract>
     {
-        public List<IPackageable> Elemente_pachet { get; set; } = new List<IPackageable>();
-        public int ProdNumber { get; set; }
-        public int ServNumber { get; set; }
+        public List<ProdusAbstract> Elemente_pachet { get; set; } = new List<ProdusAbstract>();
 
         public Pachet() 
         { 
 
         }
-
+        //Setari pentru nr de produse si servicii din pachet
         public void setTheNumberOfProducts()
         {
+            int ProdNumber;
+            int ServNumber;
             Console.WriteLine("Seteaza Numarul de produse din pachet: ");
             ProdNumber = int.Parse(Console.ReadLine() ?? string.Empty);
             // serializare date in XML
@@ -57,19 +56,20 @@ namespace Entitati
             }
         }
 
+        //Redefinire to string pentru afisare
         public override string ToString()
         {
             return "Pachet: " + base.ToString() + '\n' + ElemPachetToString();
         }
 
 
-
-        public override bool canAddToPackage(Pachet pch)
+        //Conditie adaugare pachet
+        public override bool canAddToPackage(List<ProdusAbstract> prodServ)
         {
             return false;
         }
 
-
+        //Redefinire CompareTo
         public int CompareTo(ProdusAbstract x)
         {
             return Pret.CompareTo(x.Pret);
@@ -79,24 +79,44 @@ namespace Entitati
         {
             if (first != null && second != null)
             {
-                // We can compare both properties.
+                
                 return first.Pret.CompareTo(second.Pret);
             }
 
             if (first == null && second == null)
             {
-                // We can't compare any properties, so they are essentially equal.
+                
                 return 0;
             }
 
             if (first != null)
             {
-                // Only the first instance is not null, so prefer that.
+                
                 return -1;
             }
 
-            // Only the second instance is not null, so prefer that.
+           
             return 1;
+        }
+
+        //Serializare & Deserializare
+        public void saveListToXML(List<Pachet> listaPachete, string fileName)
+        {
+            XmlSerializer xs = new XmlSerializer(typeof(List<Pachet>));
+            StreamWriter sw = new StreamWriter(fileName + ".xml");
+            xs.Serialize(sw, listaPachete);
+            sw.Close();
+        }
+
+
+        public List<Pachet> loadFromXML(string fileName)
+        {
+            XmlSerializer xs = new XmlSerializer(typeof(List<Pachet>));
+            FileStream fs = new FileStream(fileName + ".xml", FileMode.Open);
+            XmlReader reader = new XmlTextReader(fs);
+            List<Pachet>? listaPachete = (List<Pachet>?)xs.Deserialize(reader);
+            fs.Close();
+            return listaPachete;
         }
 
 

@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Entitati
 {
+    [Serializable]
+    [XmlInclude(typeof(Produs))]
+    [XmlInclude(typeof(Serviciu))]
     public abstract class ProdusAbstract:IPackageable, IComparer<ProdusAbstract>
     {
         public string? Name { get; set; }
@@ -39,7 +43,7 @@ namespace Entitati
             return false;
         }
 
-        public virtual bool canAddToPackage(Pachet pch)
+        public virtual bool canAddToPackage(List<ProdusAbstract> prodServ)
         {
             return false;
         }
@@ -57,24 +61,26 @@ namespace Entitati
         {
             if (first != null && second != null)
             {
-                // We can compare both properties.
+                
                 return first.Pret.CompareTo(second.Pret);
             }
 
             if (first == null && second == null)
             {
-                // We can't compare any properties, so they are essentially equal.
+                
                 return 0;
             }
 
             if (first != null)
             {
-                // Only the first instance is not null, so prefer that.
+                
                 return -1;
             }
 
-            // Only the second instance is not null, so prefer that.
+           
             return 1;
         }
+
+
     }
 }

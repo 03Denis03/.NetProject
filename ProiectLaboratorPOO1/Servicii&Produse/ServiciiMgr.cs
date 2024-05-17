@@ -35,6 +35,7 @@ namespace ProiectLaboratorPOO1
             for (int i = 0; i < number; i++)
             {
                 serviciu = userInputData(Id);
+                
                 ReadAbsProd(serviciu);
             }
         }
@@ -61,7 +62,7 @@ namespace ProiectLaboratorPOO1
             }
         }
 
-        public void Exista()
+        /*public void Exista()
         {
             Console.WriteLine("Cauta un produs dupa toata descrierea sa: ");
 
@@ -69,7 +70,14 @@ namespace ProiectLaboratorPOO1
             if (Contine(serv))
                 Console.WriteLine("Am gasit produsul in lista de produse");
             else Console.WriteLine("Acest produs nu exista in lista noastra de produse");
-        }
+        }*/
 
+        /*public void afisareXML()
+        {
+            Serviciu serviciu = userInputData(-1);
+            serviciu.save2XML("ServiciiSerializate");
+            Serviciu? altserviciu = serviciu.loadFromXML("ServiciiSerializate");
+            Console.WriteLine(altserviciu.ToString());
+        }*/
     }
 }

@@ -8,6 +8,6 @@ namespace Entitati
 {
     public interface IPackageable
     {
-        bool canAddToPackage(Pachet pch);
+        bool canAddToPackage(List<ProdusAbstract> prodserv);
     }
 }

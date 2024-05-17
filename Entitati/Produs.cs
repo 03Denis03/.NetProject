@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Entitati
 {
+    [Serializable]
     public class Produs: ProdusAbstract
     {
         public string? Producator { get; set; }
@@ -59,9 +60,9 @@ namespace Entitati
             return $"Produsul: {Name}[{CodIntern}] {Producator} {Categorie} {Pret}";
         }
 
-        public override bool canAddToPackage(Pachet pch)
+        public override bool canAddToPackage(List<ProdusAbstract> prodServ)
         {
-            foreach(Produs e in pch.Elemente_pachet)
+            foreach(ProdusAbstract e in prodServ)
             {
                 if(e.CompareObject(this))
                     return true;

@@ -13,7 +13,9 @@ namespace ProiectLaboratorPOO1
             string? nume;
             string? codIntern;
             string? categorie;
-
+            int pret = 0;
+            
+            
             Console.WriteLine("Introdu un pachet");
             Console.Write("Numele:");
             nume = Console.ReadLine();
@@ -24,19 +26,30 @@ namespace ProiectLaboratorPOO1
             Console.WriteLine("Categoria: ");
             categorie = Console.ReadLine();
 
-            Pachet pch;
+            Pachet pch=new Pachet();
             IdP++;
-            pch = ReadProdServ();
+            List<ProdusAbstract> prodServ = ReadProdServ();
+            foreach(ProdusAbstract ps in prodServ)
+            {
+                pch.Elemente_pachet.Add(ps);
+            }
+            
+            
+            foreach(ProdusAbstract p in pch.Elemente_pachet)
+            {
+                pret = pret + p.Pret;
+            }
+            pch.Pret = pret;
             pch.CodIntern = codIntern;
             pch.Categorie = categorie;
             pch.Name = nume;
 
             return pch;
         }
-        public Pachet ReadProdServ()
+        public List<ProdusAbstract> ReadProdServ()
         {
-            int pret = 0;
             Pachet pch = new Pachet();
+            List<ProdusAbstract> listaProduseServicii = new List<ProdusAbstract>();
             ProduseMgr prodmgr = new ProduseMgr();
             ServiciiMgr servmgr = new ServiciiMgr();
 
@@ -54,26 +67,19 @@ namespace ProiectLaboratorPOO1
             for (int i = 0; i < prodNumber; i++)
             {
                 Produs prod = prodmgr.userInputData(Id);
-                if (prod.canAddToPackage(pch))
-                {
-                    pch.Elemente_pachet.Add(prod);
-                    Id++;
-                    pret = pret + prod.Pret;
-                }
+                listaProduseServicii.Add(prod);
+                Id++;
             }
 
             for (int i = 0; i < servNumber; i++)
             {
                 Serviciu serv = servmgr.userInputData(Id);
-                if (serv.canAddToPackage(pch))
-                {
-                    pch.Elemente_pachet.Add(serv);
+                
+                    listaProduseServicii.Add(serv);
                     Id++;
-                    pret = pret + serv.Pret;
-                }
             }
-            pch.Pret = pret;
-            return pch;
+            
+            return listaProduseServicii;
         }
 
         public void readPachet(int number)
@@ -141,6 +147,24 @@ namespace ProiectLaboratorPOO1
             }
         }
 
+        //salvare in XML & Salvare in lista elemente
+        public void dataSerialization(int noOfPackages)
+        {
+            Pachet pch = new Pachet();
+            List<Pachet> lPachete = new List<Pachet>();
+            for (int i = 0; i < noOfPackages; i++)
+            {
+                Pachet pachet = userInputData();
+                lPachete.Add(pachet);
+            }
+            pch.saveListToXML(lPachete, "XML_Pachete");
+        }
+
+        public void dataDeserialization()
+        {
+            Pachet pch = new Pachet();
+            elemente.AddRange(pch.loadFromXML("XML_Pachete"));
+        }
     }
 
 

@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using System.Data;
+using System.Xml;
+using System.Xml.Serialization;
 namespace Entitati
 {
-    public class Serviciu:ProdusAbstract
+    [Serializable]
+    public class Serviciu : ProdusAbstract
     {
         public int ServiceNumber { get; set; }
-        public Serviciu(int id, string? nume, string? codIntern, string? categorie, int pret):base(nume, codIntern, id, categorie, pret)
+        public Serviciu(int id, string? nume, string? codIntern, string? categorie, int pret) : base(nume, codIntern, id, categorie, pret)
         {
-            
+
         }
-        public Serviciu():base() { }
+        public Serviciu() : base() { }
         /* public override string Descriere()
          {
              return base.Descriere();
@@ -66,9 +63,9 @@ namespace Entitati
             return $"Serviciul: {Name}[{CodIntern}] {Categorie} {Pret}";
         }
 
-        public override bool canAddToPackage(Pachet pch)
+        public override bool canAddToPackage(List<ProdusAbstract> prodServ)
         {
-            foreach (Serviciu e in pch.Elemente_pachet)
+            foreach (ProdusAbstract e in prodServ)
             {
                 if (e.CompareObject(this))
                     return true;
@@ -76,6 +73,25 @@ namespace Entitati
             return false;
 
         }
+
+       /* public void save2XML(string fileName)
+        {
+            XmlSerializer xs = new XmlSerializer(typeof(Serviciu));
+            StreamWriter sw = new StreamWriter(fileName + ".xml");
+            xs.Serialize(sw, this);
+            sw.Close();
+        }
+
+        public Serviciu? loadFromXML(string fileName)
+        {
+            XmlSerializer xs = new XmlSerializer(typeof(Serviciu));
+            FileStream fs = new FileStream(fileName + ".xml", FileMode.Open);
+            XmlReader reader = new XmlTextReader(fs);
+            //deserializare cu crearea de obiect => constructor fara param
+            Serviciu? serviciu = (Serviciu?)xs.Deserialize(reader);
+            fs.Close();
+            return serviciu;
+        }*/
 
     }
 
